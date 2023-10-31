@@ -1,0 +1,30 @@
+name: Darknet Continuous Integration
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+
+env:
+  DISABLED_VCPKG_BINARY_SOURCES: 'clear;nuget,vcpkgbinarycache,readwrite'
+  VCPKG_FORCE_DOWNLOADED_BINARIES: "TRUE"
+
+jobs:
+  win-vcpkg:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
+    - uses: lukka/get-cmake@latest
+
+    - name: 'Build'
+      shell: pwsh
+      run: ${{ github.workspace }}/build.ps1 -UseVCPKG -ForceLocalVCPKG -DisableInteractive -DoNotUpdateTOOL

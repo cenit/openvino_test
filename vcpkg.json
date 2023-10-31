@@ -1,0 +1,9 @@
+{
+  "name": "openvinotest",
+  "version": "0.1",
+  "description": "Test for building openvino on a github runner",
+  "homepage": "https://github.com/cenit/openvino_test",
+  "dependencies": [
+    "openvino"
+  ]
+}
