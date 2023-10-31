@@ -1,4 +1,4 @@
-name: Darknet Continuous Integration
+name: Continuous Integration
 
 on:
   push:
@@ -20,10 +20,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - uses: lukka/get-cmake@latest
+
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
-
-    - uses: lukka/get-cmake@latest
 
     - name: 'Build'
       shell: pwsh
